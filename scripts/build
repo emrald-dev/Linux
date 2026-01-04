@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Paths
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")"/.. && pwd)"
+CONFIG_DIR="$ROOT_DIR/.linux"
+SCRIPT="$ROOT_DIR/main.py"
+
+APP_NAME="linux"
+
+# Ensure build directories exist
+mkdir -p "$CONFIG_DIR"
+mkdir -p "$CONFIG_DIR/build"
+mkdir -p "$CONFIG_DIR/dist"
+
+echo "INFO: Building $APP_NAME..."
+pyinstaller \
+    --name "$APP_NAME" \
+    --onefile \
+    --workpath "$CONFIG_DIR/build" \
+    --distpath "$CONFIG_DIR/dist" \
+    --specpath "$CONFIG_DIR" \
+    "$SCRIPT"
+
+echo "SUCCESS: Build finished!"
+echo "Build files: $CONFIG_DIR/build"
+echo "Executable: $CONFIG_DIR/dist/$APP_NAME"

@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Paths
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")"/.. && pwd)"
+BUILDS="$ROOT_DIR/.linux"
+BIN="$BUILDS/dist/linux"
+LOCAL_BIN="$HOME/.local/bin"
+
+echo "INFO: Installing binary..."
+echo "Source: $BIN"
+echo "Destination: $LOCAL_BIN"
+
+# Ensure destination exists
+mkdir -p "$LOCAL_BIN"
+
+# Copy binary and make executable
+cp "$BIN" "$LOCAL_BIN/linux"
+chmod 755 "$LOCAL_BIN/linux"
+
+echo "SUCCESS: Installed to $LOCAL_BIN/linux"
+
+# Check if LOCAL_BIN is in PATH
+if ! echo "$PATH" | grep -q "$LOCAL_BIN"; then
+    echo "WARNING: $LOCAL_BIN is not in your PATH."
+    echo "Add this line to your shell config (~/.bashrc or ~/.zshrc):"
+    echo "export PATH=\"\$PATH:$LOCAL_BIN\""
+fi
