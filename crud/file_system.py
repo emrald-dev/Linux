@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from .logger import logger
+from .utils import logger
 
 class FileSystem:
     def __init__(self):
@@ -11,6 +11,8 @@ class FileSystem:
         self.bin = self.home / ".local/bin"
         self.state = self.home / ".local/state"
 
+        self.dev = self.home / "Workspace/Linux"
+
     def ping_folders(self):
         logger.ping(f"(Home Folder)     [cyan]{fs.home}[/cyan]")
         logger.ping(f"(Config Folder)   [cyan]{fs.config}[/cyan]")
@@ -18,6 +20,8 @@ class FileSystem:
         logger.ping(f"(Share Folder)    [cyan]{fs.share}[/cyan]")
         logger.ping(f"(Bin Folder)      [cyan]{fs.bin}[/cyan]")
         logger.ping(f"(State Folder)    [cyan]{fs.state}[/cyan]")
+
+        logger.ping(f"(Project Folder)  [cyan]{fs.dev}[/cyan]")
 
 
 fs = FileSystem()
