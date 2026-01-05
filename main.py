@@ -41,8 +41,15 @@ def theme(
 
 
 @app.command()
-def update():
-    update_dotfiles()
+def dots(
+    update: bool = typer.Option(
+        False,
+        "--update",
+        help="Print the currently active theme",
+    ),
+):
+    if update:
+        dotfiles.update_dotfiles()
 
 
 @app.command()
