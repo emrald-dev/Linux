@@ -22,7 +22,7 @@ def theme(
     update: bool = typer.Option(
         False,
         "--update",
-        help="Print the currently active theme",
+        help="Update the system themes folder",
     ),
 ):
     if set:
@@ -45,7 +45,7 @@ def dots(
     update: bool = typer.Option(
         False,
         "--update",
-        help="Print the currently active theme",
+        help="Update the system dotfiles",
     ),
 ):
     if update:

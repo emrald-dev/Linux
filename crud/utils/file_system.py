@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from .utils import logger
+from .logger import logger
 
 class FileSystem:
     def __init__(self):

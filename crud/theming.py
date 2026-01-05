@@ -1,7 +1,6 @@
 from pathlib import Path
 
-from .file_system import fs
-from .utils import cons, copy_dir
+from .utils import cons, fs, copy_dir
 
 
 class Themes:
