@@ -43,5 +43,9 @@ aur:
     - ttf-jetbrains-mono-nerd
 
 inhouse:
-  - fs.dev / ".linux"
-  - fs.dev / "themes"
+  - src: ".linux"
+    method: "dir"
+  - src: "themes"
+    method: "dir"
+  - src: "dotfiles"
+    method: "contents"
