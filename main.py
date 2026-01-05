@@ -60,25 +60,29 @@ def install(
         "--deps",
         help="Install all dependencies (Arch official + AUR), and also this program's."
     ),
+    dry: bool = typer.Option(
+        False,
+        "--dry",
+        help="Simulate installation without making changes."
+    )
 ):
     if deps:
-        cons.print("Attempting to install dependencies, please wait.")
+        cons.print("[cyan]Starting installation (dry-run)[/]" if dry else "Attempting to install dependencies, please wait.")
 
-        # fs.deps should be something like:
-        # {
-        #   "pacman": { "base": ["git", "curl"], ... },
-        #   "aur": { "custom": ["package1", "package2"], ... }
-        # }
-
-        # Load the YAML file
+        # Load YAML
         with fs.deps.open("r", encoding="utf-8") as f:
             deps_data = yaml.safe_load(f) or {}
 
         pacman_pkgs = deps_data.get("pacman", {})
         aur_pkgs = deps_data.get("aur", {})
-        inhouse_pkgs = deps_data.get("aur", {})
+        inhouse_pkgs = deps_data.get("inhouse", [])
 
-        depi = DepsInstaller(pacman=pacman_pkgs, aur=aur_pkgs, inhouse=inhouse_pkgs, dry_run=False)
+        depi = DepsInstaller(
+            pacman=pacman_pkgs,
+            aur=aur_pkgs,
+            inhouse=inhouse_pkgs,
+            dry_run=dry
+        )
         depi.install_all()
         depi.summary()
 
