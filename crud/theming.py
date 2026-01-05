@@ -6,7 +6,7 @@ from .utils import cons, fs, copy_dir
 class Themes:
     def __init__(self):
         self.dev_dir = fs.dev / "themes"
-        self.sys_dir = fs.share
+        self.sys_dir = fs.home / ".linux"
 
     def get_current_theme(self):
         cons.print("Attempting to get the current theme, please wait.")

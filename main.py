@@ -58,7 +58,7 @@ def install(
     deps: bool = typer.Option(
         False,
         "--deps",
-        help="Install all dependencies (Arch official + AUR)."
+        help="Install all dependencies (Arch official + AUR), and also this program's."
     ),
 ):
     if deps:
@@ -76,8 +76,9 @@ def install(
 
         pacman_pkgs = deps_data.get("pacman", {})
         aur_pkgs = deps_data.get("aur", {})
+        inhouse_pkgs = deps_data.get("aur", {})
 
-        depi = DepsInstaller(pacman=pacman_pkgs, aur=aur_pkgs, dry_run=False)
+        depi = DepsInstaller(pacman=pacman_pkgs, aur=aur_pkgs, inhouse=inhouse_pkgs, dry_run=False)
         depi.install_all()
         depi.summary()
 

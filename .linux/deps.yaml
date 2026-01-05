@@ -41,3 +41,7 @@ aur:
     - audiorelay
   fonts:
     - ttf-jetbrains-mono-nerd
+
+inhouse:
+  - fs.dev / ".linux"
+  - fs.dev / "themes"

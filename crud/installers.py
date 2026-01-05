@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import Dict, List
 from rich.table import Table
 
-from .utils import cons
+from .utils import cons, fs, copy_dir, copy_dir_contents
 
 
 def flatten(groups: Dict[str, List[str]]) -> Dict[str, str]:
@@ -19,9 +19,10 @@ def flatten(groups: Dict[str, List[str]]) -> Dict[str, str]:
     
 
 class DepsInstaller:
-    def __init__(self, pacman: Dict, aur: Dict, dry_run: bool = False):
+    def __init__(self, pacman: Dict, aur: Dict, inhouse: Dict, dry_run: bool = False):
         self.pacman = flatten(pacman)
         self.aur = flatten(aur)
+        self.inhouse = flatten(inhouse)
         self.failed = []
         self.skipped = []
         self.dry_run = dry_run
@@ -70,6 +71,15 @@ class DepsInstaller:
             cons.print(f"[cyan]OK[/] {pkg} (already installed)")
         else:
             cons.print(f"[green]OK[/] {pkg} installed")
+    
+    def install_inhouse(self, pkg):
+        try:
+            copy_dir(fs.dev / ".linux", fs.home)
+            copy_dir(fs.dev / "themes", fs.home / ".linux")
+            copy_dir_contents(fs.dev / "dotfiles", fs.home)
+
+        except Exception as e:
+            cons.print(e)
 
     def install_all(self):
         cons.print("[bold magenta]Installing official packages[/]")
@@ -79,6 +89,9 @@ class DepsInstaller:
         cons.print("[bold magenta]\nInstalling AUR packages[/]")
         for pkg in self.aur:
             self.install_pkg("aur", pkg)
+        
+        for pkg in self.inhouse:
+            self.install_inhouse(pkg)
 
     def summary(self):
         table = Table(title="\nInstallation Summary")
