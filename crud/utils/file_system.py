@@ -12,6 +12,7 @@ class FileSystem:
         self.state = self.home / ".local/state"
 
         self.dev = self.home / "Workspace/Linux"
+        self.deps = self.dev / ".linux/deps.yaml"
 
     def ping_folders(self):
         logger.ping(f"(Home Folder)     [cyan]{fs.home}[/cyan]")

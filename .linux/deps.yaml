@@ -1,0 +1,43 @@
+pacman:
+  core:
+    - base-devel
+    - git
+    - curl
+    - wget
+    - stow
+    - tree
+    - fzf
+
+  desktop:
+    - rofi
+    - waybar
+    - kitty
+    - mpv
+    - firefox
+    - pavucontrol
+    - brightnessctl
+
+  dev:
+    - neovim
+    - code
+    - rustup
+    - nvm
+
+  xorg:
+    - libxrender
+    - libxext
+    - libxtst
+    - fontconfig
+
+  fonts:
+    - ttf-dejavu
+    - ttf-liberation
+    - noto-fonts
+    - noto-fonts-cjk
+    - noto-fonts-emoji
+
+aur:
+  desktop:
+    - audiorelay
+  fonts:
+    - ttf-jetbrains-mono-nerd
