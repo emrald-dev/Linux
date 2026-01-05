@@ -5,13 +5,13 @@ from .utils import cons, fs, copy_dir
 
 class Themes:
     def __init__(self):
-        self.dev_dir = fs.dev / "themes"
+        self.dev_dir = fs.dev / ".linux/themes"
         self.sys_dir = fs.home / ".linux"
 
     def get_current_theme(self):
         cons.print("Attempting to get the current theme, please wait.")
         try:
-            path = self.sys_dir / "themes/.current"
+            path = self.sys_dir / ".linux/themes/.current"
 
             if Path(path).exists():
                 with open(path, "r") as f:
@@ -26,7 +26,7 @@ class Themes:
     def set_theme(self, theme):
         cons.print("Attempting theme setting, please wait.")
         try:
-            path = self.sys_dir / "themes/.current"
+            path = self.sys_dir / ".linux/themes/.current"
 
             if Path(path).exists():
                 with open(path, "w") as f:
@@ -43,7 +43,7 @@ class Themes:
     def update_themes(self):
         cons.print("Attempting theme update, please wait.")
         try:
-            copy_dir(self.dev_dir, self.sys_dir)
+            copy_dir(self.dev_dir / ".current", self.sys_dir / ".linux/themes")
 
             cons.print("Success.")
 

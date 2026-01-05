@@ -45,7 +45,5 @@ aur:
 inhouse:
   - src: ".linux"
     method: "dir"
-  - src: "themes"
-    method: "dir"
   - src: "dotfiles"
     method: "contents"
